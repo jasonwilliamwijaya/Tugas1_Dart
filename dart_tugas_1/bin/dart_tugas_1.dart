@@ -95,56 +95,44 @@ void main() {
   }
   //print pola untuk genap
   else if (n % 2 == 0) {
+    int inkremen_kiri = 1;
+    int dekremen_kanan = n;
 
-    List<int?> arr_kiri = []..length = n + 1;
-    List<int?> arr_kanan = []..length = n + 1;
-    int? temp = 0;
-
-    //deklarasi isi array kiri
-    for (int i = 1; i <= n; i++) {
-      arr_kiri[i] = i;
+    if (n > 9) {
+      dekremen_kanan = 9;
     }
 
-    //deklarasi isi array kanan
-    for (int i = n; i >= 1; i--) {
-      arr_kanan[i] = i;
-    }
-
-    //atur dan print array
     for (int i = 1; i <= n; i++) {
       //loop kiri
       for (int j = 1; j <= n; j++) {
         if (j <= n - (i - 1)) {
-          stdout.write(arr_kiri[j]);
+          stdout.write(inkremen_kiri);
+          inkremen_kiri = inkremen_kiri + 1;
+          if (inkremen_kiri > n || inkremen_kiri > 9) {
+            inkremen_kiri = 1;
+          }
         } else if (j > n - (i - 1)) {
           stdout.write(" ");
-        }
-      }
-
-      if (i > 1) {
-        for (int x = n; x >= 2; x--) {
-          temp = arr_kiri[x];
-          arr_kiri[x] = arr_kiri[x - 1];
-          arr_kiri[x - 1] = temp;
         }
       }
 
       //loop kanan
       for (int k = n; k >= 1; k--) {
         if (k <= n - (i - 1)) {
-          stdout.write(arr_kanan[k]);
+          stdout.write(dekremen_kanan);
+          dekremen_kanan = dekremen_kanan - 1;
+          if (dekremen_kanan == 0) {
+            if (n > 9) {
+              dekremen_kanan = 9;
+            } else {
+              dekremen_kanan = n;
+            }
+          }
         } else if (k > n - (i - 1)) {
           stdout.write(" ");
         }
       }
 
-      if (i > 1) {
-        for (int x = n; x >= 2; x--) {
-          temp = arr_kanan[x];
-          arr_kanan[x] = arr_kanan[x - 1];
-          arr_kanan[x - 1] = temp;
-        }
-      }
       print("");
     }
   }
