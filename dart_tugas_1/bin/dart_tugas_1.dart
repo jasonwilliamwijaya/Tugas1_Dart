@@ -1,6 +1,8 @@
 import 'dart:io';
+import 'dart:convert';
 
 void main() {
+  stdout.write("Masukkan ukuran pola : ");
   String? inputn = stdin.readLineSync();
   int n = int.parse(inputn!);
 
@@ -93,6 +95,57 @@ void main() {
   }
   //print pola untuk genap
   else if (n % 2 == 0) {
-    
+
+    List<int?> arr_kiri = []..length = n + 1;
+    List<int?> arr_kanan = []..length = n + 1;
+    int? temp = 0;
+
+    //deklarasi isi array kiri
+    for (int i = 1; i <= n; i++) {
+      arr_kiri[i] = i;
+    }
+
+    //deklarasi isi array kanan
+    for (int i = n; i >= 1; i--) {
+      arr_kanan[i] = i;
+    }
+
+    //atur dan print array
+    for (int i = 1; i <= n; i++) {
+      //loop kiri
+      for (int j = 1; j <= n; j++) {
+        if (j <= n - (i - 1)) {
+          stdout.write(arr_kiri[j]);
+        } else if (j > n - (i - 1)) {
+          stdout.write(" ");
+        }
+      }
+
+      if (i > 1) {
+        for (int x = n; x >= 2; x--) {
+          temp = arr_kiri[x];
+          arr_kiri[x] = arr_kiri[x - 1];
+          arr_kiri[x - 1] = temp;
+        }
+      }
+
+      //loop kanan
+      for (int k = n; k >= 1; k--) {
+        if (k <= n - (i - 1)) {
+          stdout.write(arr_kanan[k]);
+        } else if (k > n - (i - 1)) {
+          stdout.write(" ");
+        }
+      }
+
+      if (i > 1) {
+        for (int x = n; x >= 2; x--) {
+          temp = arr_kanan[x];
+          arr_kanan[x] = arr_kanan[x - 1];
+          arr_kanan[x - 1] = temp;
+        }
+      }
+      print("");
+    }
   }
 }
